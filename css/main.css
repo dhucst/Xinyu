@@ -1,0 +1,144 @@
+@font-face{
+    font-family: 'STXINGKA';
+    src : url('../fonts/STXINGKA.ttf');
+}
+
+.bar-nav{
+    background-color: #e91e63 ;
+    color: #eeeeee ;
+}
+.bar-footer{
+    background-color: #eeeeee ;
+}
+.m-title{
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    text-align: center!important;
+    font-size: 1.05rem;
+    font-family: 'STXINGKA';
+}
+.label{
+    position: relative;
+    vertical-align: middle;
+    padding: 0.5rem 0.1rem;
+}
+.p-title{
+    height: 40% ;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    font-size: 0.6rem;
+    text-align: center;
+}
+
+
+.message {
+    margin: 10px auto;
+    overflow: hidden;
+    max-width: 25rem;
+    position: relative;
+}
+.message-text {
+    padding: 10px 20px;
+    float: left;
+    clear: both;
+    border-radius: 25px;
+    position: relative;
+    margin-bottom: 1px;
+}
+.message.left .message-text {
+    margin-right: 70px;
+    margin-left: 20px;
+    background-color: lightgray;
+    float: left;
+}
+.message.right .message-text {
+    margin-left: 50px;
+    margin-right: 20px;
+    background-color: #f44336;
+    color: #fff;
+    float: right;
+}
+
+
+
+.message-text:last-child:before,
+.message-text:last-child:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 35px;
+    height: 25px;
+    z-index: -1;
+}
+
+.message.right .message-text:before,
+.message.right .message-text:after {
+    border-radius: 0 0 0 50%;
+}
+.message.right .message-text:before {
+    height: 20px;
+    right: -23px;
+    background-color: #f44336;
+}
+.message.right .message-text:after {
+    right: -35px;
+    bottom: -3px;
+    background-color: #eee;
+}
+
+
+.message.left .message-text:before,
+.message.left .message-text:after {
+    border-radius: 0 0 50% 0;
+}
+.message.left .message-text:before {
+    height: 20px;
+    left: -23px;
+    background-color: lightgray!important;
+}
+.message.left .message-text:after {
+    left: -35px;
+    bottom: -3px;
+    background-color: #eee;
+}
+
+#message-in #msg-in{
+    display: table-cell;
+    width: 80%;
+    height: 1.5rem;
+    padding-right: 1rem;
+    position: static;
+    margin: 0.4rem;
+}
+
+.message-text{
+    color: black!important;
+}
+
+#welcome{
+    background-image: url("../images/background-welcome.jpg");
+    background-position: center bottom;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#welcome-head{
+    background-color: rgba(0,0,0,0)!important;
+}
+
+#welcome-head:after{
+    height: 0px !important;
+}
+
+.intro{
+    line-height: 500%;
+    font-family: Helvetica,sans-serif;
+    text-align: center;
+    margin-top: 8rem;
+    color: rgba(255,255,255,0.45);
+}

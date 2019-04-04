@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>心语 - Heart</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+    <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
+    <script type='text/javascript' src="http://g.alicdn.com/sj/lib/zepto/zepto.js" charset='utf-8'></script>
+    <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="page-group" id="main">
+    <div class="page  page-current" id="welcome">
+        <header class="bar bar-nav" id="welcome-head">
+            <span class="icon icon-menu  open-panel pull-left"></span>
+            <div class="m-title">心语 - Heart</div>
+            <div class="p-title" id="main-status">连接中...</div>
+            <span class="pull-right label open-popup" data-popup=".popup-about">
+                关于
+            </span>
+        </header>
+        <div class="intro">
+            <p style="margin-right: 3rem;">怦然心动</p>
+            <p style="margin-left: 3rem;">语你相遇</p>
+        </div>
+        <a href='#chat' class="button button-big" style="width: 10rem;border-color:white;color:white;margin: auto;">
+            开始聊天
+        </a>
+        <div style="position: absolute; bottom: 0px; font-size: 0.5rem; margin: auto; width: 100%; text-align: center; color: #c6c6c6;line-height: 50%;">
+            <p>Copyright © Mr.Cyprinus All Rights Reserved.</p>
+            <p>Background Image by Florian Schneider on Unsplash.</p>
+        </div>
+    </div>
+    <div class="page" id="chat">
+        <header class="bar bar-nav">
+            <span class="icon icon-menu  open-panel pull-left"></span>
+            <span class="pull-right label">
+                举报
+            </span>
+            <div class="m-title">心语 - Heart</div>
+            <div id="status" class="p-title">在线</div>
+        </header>
+        <div class="content" >
+            <div id="messages">
+
+            </div>
+            <div class="message" style="height: 70px"></div>
+
+        </div>
+        <div class="bar bar-footer">
+            <div id="message-in">
+                <input type="text" id="msg-in" placeholder="输入信息">
+                <a href="" id="send">发送</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup popup-about">
+    <div class="content-block">
+        <p>About</p>
+        <p>Copyright © Mr.Cyprinus All Rights Reserved.</p>
+        <p style="text-align: center;font-size: 1.5rem;"><span class="icon icon-down close-popup"></span></p>
+    </div>
+</div>
+<div class="panel-overlay"></div>
+<script>
+    var $j = jQuery.noConflict();
+    $j(document).ready(function () {
+        $.init();
+        $j("#messages:last").append("<div class=\"message right\">\n" +
+            "                <div class=\"message-text\">\n" +
+            "                    " + "hi" +"\n" +
+            "                </div>\n" +
+            "            </div>");
+        $j.ajax({url:'http://localhost:5000/getResponse/' + "hi", dataType:"text", success: function (data) {
+                $j("#messages:last").append("<div class=\"message left\">\n" +
+                    "                <div class=\"message-text\">\n" +
+                    "                    " + data +"\n" +
+                    "                </div>\n" +
+                    "            </div>");
+                $.toast("连接成功！");
+                $j("#main-status").text("在线");
+            }});
+    });
+    $j("#send").click(function () {
+        $j("#status").text("正在输入...");
+        var msg = $j("#msg-in").val();
+        $j("#msg-in").val("");
+        if (msg === "" )
+        {
+            $.toast("消息不能为空！");
+            return;
+        }
+        $j("#messages:last").append("<div class=\"message right\">\n" +
+            "                <div class=\"message-text\">\n" +
+            "                    " + msg +"\n" +
+            "                </div>\n" +
+            "            </div>");
+        $j.ajax({url:'http://localhost:5000/getResponse/' + msg, dataType:"text", success: function (data) {
+            if ((data.search(".jpg") !== -1)  && (data.search("rule") !== -1)){
+                $j("#messages:last").append("<div class=\"message left\">\n" +
+                    "                    <div class=\"message-text\">\n" +
+                    "                        <img src=\"images/" + data +"\">\n" +
+                    "                    </div>\n" +
+                    "                </div>");
+                $j("#status").text("在线");
+            }else {
+                $j("#messages:last").append("<div class=\"message left\">\n" +
+                    "                <div class=\"message-text\">\n" +
+                    "                    " + data +"\n" +
+                    "                </div>\n" +
+                    "            </div>");
+                $j("#status").text("在线");
+            }
+        }});
+
+    });
+</script>
+</body>
+</html>
